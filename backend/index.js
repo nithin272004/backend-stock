@@ -29,7 +29,12 @@ const stockSchema = new mongoose.Schema({
 const Stock = mongoose.model('Stock', stockSchema);
 
 // Connect to MongoDB
-mongoose.connect(MONGO_URI)
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  connectTimeoutMS: 30000,  // Increase the connection timeout to 30 seconds
+  socketTimeoutMS: 45000,   // Increase the socket timeout to 45 seconds
+})
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error(err));
 
